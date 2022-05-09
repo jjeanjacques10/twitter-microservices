@@ -1,0 +1,41 @@
+version: '3.1'
+services:
+  database:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'tweet_database'
+      MYSQL_USER: 'tweet_user'
+      MYSQL_PASSWORD: 'brtwcvv1'
+      MYSQL_ROOT_PASSWORD: 'brtwcvv1'
+    ports:
+      - '3306:3306'
+    volumes:
+      - my-db:/var/lib/mysql
+  dynamodb-local:
+    image: localstack/localstack:latest
+    restart: always
+    environment:
+      - AWS_DEFAULT_REGION=us-west-2
+      - EDGE_PORT=4566
+      - SERVICES=dynamodb
+      - KINESIS_PROVIDER=kinesalite
+    ports:
+      - '4566:4566'
+    volumes:
+      - "${TMPDIR:-/tmp/localstack}:/tmp/localstack"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+  dynamodb-admin:
+    image: aaronshaf/dynamodb-admin
+    ports:
+      - "8001:8001"
+    environment:
+      DYNAMO_ENDPOINT: "http://dynamodb-local:4566"
+      AWS_REGION: "us-west-2"
+      AWS_ACCESS_KEY_ID: local
+      AWS_SECRET_ACCESS_KEY: local
+    depends_on:
+      - dynamodb-local
+
+volumes:
+  my-db:
