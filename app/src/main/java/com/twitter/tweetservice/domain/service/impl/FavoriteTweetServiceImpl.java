@@ -23,8 +23,8 @@ public class FavoriteTweetServiceImpl implements FavoriteTweetService {
     @Override
     public FavoriteTweet favoriteTweet(String userId, String tweeId, FavoriteAction action) {
         FavoriteTweet favoriteTweet = FavoriteTweet.builder()
-                .tweet_id(tweeId)
-                .user_id(userId)
+                .tweetId(tweeId)
+                .userId(userId)
                 .likedAt(LocalDateTime.now())
                 .build();
         FavoriteTweet favoritedTweet = favoriteTweetRepository.favoriteTweet(favoriteTweet);

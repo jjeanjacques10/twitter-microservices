@@ -10,12 +10,15 @@ import software.amazon.awssdk.enhanced.dynamodb.DynamoDbEnhancedClient;
 import software.amazon.awssdk.enhanced.dynamodb.DynamoDbTable;
 import software.amazon.awssdk.enhanced.dynamodb.Key;
 import software.amazon.awssdk.enhanced.dynamodb.TableSchema;
+import software.amazon.awssdk.enhanced.dynamodb.model.Page;
 import software.amazon.awssdk.enhanced.dynamodb.model.PageIterable;
 import software.amazon.awssdk.enhanced.dynamodb.model.QueryConditional;
 import software.amazon.awssdk.services.dynamodb.model.DynamoDbException;
 
 import javax.annotation.PostConstruct;
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Repository
@@ -46,11 +49,11 @@ public class FavoriteTweetRepositoryImpl implements FavoriteTweetRepository {
     public List<FavoriteTweet> findTweetFavoriteByUserId(String userId) {
         QueryConditional queryConditional = QueryConditional
                 .keyEqualTo(Key.builder()
-                        .sortValue(userId)
+                        .partitionValue(userId)
                         .build());
 
-        PageIterable<FavoriteTweet> query = table.query(r -> r.queryConditional(queryConditional));
-        return query.items().stream().toList();
+        return table.index("user_index").query(r -> r.queryConditional(queryConditional))
+                .stream().map(Page::items).flatMap(Collection::stream).toList();
     }
 
     @Override
@@ -59,8 +62,8 @@ public class FavoriteTweetRepositoryImpl implements FavoriteTweetRepository {
             table.putItem(favoriteTweet);
             return favoriteTweet;
         } catch (DynamoDbException exception) {
-            log.error("Error to favorite tweet {} - {}", favoriteTweet.getTweet_id(), exception.getMessage());
-            throw null;
+            log.error("Error to favorite tweet {} - {}", favoriteTweet.getTweetId(), exception.getMessage());
+            return null;
         }
     }
 }

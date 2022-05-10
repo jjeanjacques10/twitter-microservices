@@ -21,7 +21,34 @@
     }
   ],
   "ProvisionedThroughput": {
-    "ReadCapacityUnits": 3,
-    "WriteCapacityUnits": 3
-  }
+    "LastIncreaseDateTime": "1970-01-01T00:00:00.000Z",
+    "LastDecreaseDateTime": "1970-01-01T00:00:00.000Z",
+    "NumberOfDecreasesToday": 0,
+    "ReadCapacityUnits": 10,
+    "WriteCapacityUnits": 10
+  },
+  "GlobalSecondaryIndexes": [
+    {
+      "IndexName": "user_index",
+      "KeySchema": [
+        {
+          "AttributeName": "user_id",
+          "KeyType": "HASH"
+        },
+        {
+          "AttributeName": "tweet_id",
+          "KeyType": "RANGE"
+        }
+      ],
+      "Projection": {
+        "ProjectionType": "ALL"
+      },
+      "IndexStatus": "ACTIVE",
+      "ProvisionedThroughput": {
+        "ReadCapacityUnits": 10,
+        "WriteCapacityUnits": 10
+      },
+      "IndexArn": "arn:aws:dynamodb:ddblocal:000000000000:table/tb_favorite_tweets/index/user_index"
+    }
+  ]
 }

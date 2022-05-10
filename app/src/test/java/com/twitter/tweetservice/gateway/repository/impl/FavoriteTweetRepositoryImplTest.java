@@ -26,21 +26,21 @@ class FavoriteTweetRepositoryImplTest {
     FavoriteTweetRepositoryImpl favoriteTweetRepository;
 
     @Test
-    void findTweetLikes() {
+    void shouldFindTweetLikes() {
         List<FavoriteTweet> tweetLikes = favoriteTweetRepository.findTweetFavoriteByTweetId("99b9c235-0ca1-4da5-b88f-5b653baa7139");
         assert !tweetLikes.isEmpty();
     }
 
     @Test
-    void likeTweet() {
+    void shouldLikeTweet() {
         FavoriteTweet expectedFavoriteTweet = FavoriteTweet.builder()
-                .tweet_id(UUID.randomUUID().toString())
-                .user_id(UUID.randomUUID().toString())
+                .tweetId(UUID.randomUUID().toString())
+                .userId(UUID.randomUUID().toString())
                 .likedAt(LocalDateTime.now())
                 .build();
 
         FavoriteTweet favoriteTweetResult = favoriteTweetRepository.favoriteTweet(expectedFavoriteTweet);
 
-        assert favoriteTweetResult.getTweet_id() == expectedFavoriteTweet.getTweet_id();
+        assert favoriteTweetResult.getTweetId() == expectedFavoriteTweet.getTweetId();
     }
 }
