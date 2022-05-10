@@ -1,15 +1,17 @@
 package com.twitter.tweetservice.domain.service.impl;
 
 import com.twitter.tweetservice.domain.entity.Tweet;
+import com.twitter.tweetservice.domain.service.TweetService;
+import com.twitter.tweetservice.exception.TweetNotFound;
 import com.twitter.tweetservice.gateway.repository.TweetRepository;
 import com.twitter.tweetservice.gateway.rest.datacontract.TweetDto;
-import com.twitter.tweetservice.domain.service.TweetService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -22,10 +24,12 @@ public class TweetServiceImpl implements TweetService {
     private ModelMapper mapper;
 
     @Override
-    public List<TweetDto> listTweetsByUser(String userId) {
-        List<Tweet> tweets = tweetRepository.findByUserId(userId);
-        return tweets.stream()
-                .map(t -> mapper.map(t, TweetDto.class)).toList();
+    public Page<Tweet> listTweetsByUser(String userId, Pageable pageable) {
+        Page<Tweet> tweets = tweetRepository.findByUserId(userId, pageable);
+        if (tweets.isEmpty()) {
+            throw new TweetNotFound("Tweets not found - user " + userId);
+        }
+        return tweets;
     }
 
     @Override

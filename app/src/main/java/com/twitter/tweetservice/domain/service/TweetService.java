@@ -1,12 +1,14 @@
 package com.twitter.tweetservice.domain.service;
 
+import com.twitter.tweetservice.domain.entity.Tweet;
 import com.twitter.tweetservice.gateway.rest.datacontract.TweetDto;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
-import java.util.List;
 
 public interface TweetService {
 
-    List<TweetDto> listTweetsByUser(String userId);
+    Page<Tweet> listTweetsByUser(String userId, Pageable pageable);
 
     void createTweet(TweetDto tweetDto);
 

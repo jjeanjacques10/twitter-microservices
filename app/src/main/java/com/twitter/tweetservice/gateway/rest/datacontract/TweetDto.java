@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -21,6 +22,8 @@ public class TweetDto {
     private String userId;
 
     @NotNull
+    @Size(max = 140, message = "Invalid content size, the limit is 140 characters")
     private String content;
+
     private LocalDateTime createdAt;
 }
