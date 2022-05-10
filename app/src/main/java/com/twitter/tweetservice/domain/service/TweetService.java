@@ -1,4 +1,4 @@
-package com.twitter.tweetservice.service;
+package com.twitter.tweetservice.domain.service;
 
 import com.twitter.tweetservice.gateway.rest.datacontract.TweetDto;
 

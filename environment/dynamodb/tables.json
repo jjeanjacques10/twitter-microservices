@@ -1,7 +1,7 @@
 {
   "AttributeDefinitions": [
     {
-      "AttributeName": "post_id",
+      "AttributeName": "tweet_id",
       "AttributeType": "S"
     },
     {
@@ -12,7 +12,7 @@
   "TableName": "tb_favorite_tweets",
   "KeySchema": [
     {
-      "AttributeName": "post_id",
+      "AttributeName": "tweet_id",
       "KeyType": "HASH"
     },
     {
@@ -20,16 +20,8 @@
       "KeyType": "RANGE"
     }
   ],
-  "TableStatus": "ACTIVE",
-  "CreationDateTime": "2022-05-09T21:56:47.542Z",
   "ProvisionedThroughput": {
-    "LastIncreaseDateTime": "1970-01-01T00:00:00.000Z",
-    "LastDecreaseDateTime": "1970-01-01T00:00:00.000Z",
-    "NumberOfDecreasesToday": 0,
     "ReadCapacityUnits": 3,
     "WriteCapacityUnits": 3
-  },
-  "TableSizeBytes": 0,
-  "ItemCount": 0,
-  "TableArn": "arn:aws:dynamodb:us-west-2:000000000000:table/tb_favorite_tweets"
+  }
 }

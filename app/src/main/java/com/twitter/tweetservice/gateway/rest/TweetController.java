@@ -1,7 +1,7 @@
 package com.twitter.tweetservice.gateway.rest;
 
 import com.twitter.tweetservice.gateway.rest.datacontract.TweetDto;
-import com.twitter.tweetservice.service.TweetService;
+import com.twitter.tweetservice.domain.service.TweetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

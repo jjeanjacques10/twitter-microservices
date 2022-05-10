@@ -1,9 +1,9 @@
-package com.twitter.tweetservice.service.impl;
+package com.twitter.tweetservice.domain.service.impl;
 
 import com.twitter.tweetservice.domain.entity.Tweet;
 import com.twitter.tweetservice.gateway.repository.TweetRepository;
 import com.twitter.tweetservice.gateway.rest.datacontract.TweetDto;
-import com.twitter.tweetservice.service.TweetService;
+import com.twitter.tweetservice.domain.service.TweetService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Service
 public class TweetServiceImpl implements TweetService {

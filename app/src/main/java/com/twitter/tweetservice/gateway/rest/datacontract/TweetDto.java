@@ -5,7 +5,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 
 @Data
@@ -13,8 +15,12 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TweetDto {
-    private String id;
+    private UUID id;
+
+    @NotNull
     private String userId;
-    private LocalDateTime createdAt;
+
+    @NotNull
     private String content;
+    private LocalDateTime createdAt;
 }
