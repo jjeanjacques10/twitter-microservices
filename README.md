@@ -1,4 +1,8 @@
-# Tweet Service
+# Microservices Architecture of Twitter Service
+
+Repository to recreate the microservices architecture of Twitter. The first service created was:
+
+### Tweet Service
 
 Microservice to record tweets and favorite actions.
 
