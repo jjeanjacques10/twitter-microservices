@@ -1,6 +1,8 @@
 package com.twitter.tweetservice.gateway.rest;
 
+import com.twitter.tweetservice.domain.entity.FavoriteTweet;
 import com.twitter.tweetservice.domain.entity.Tweet;
+import com.twitter.tweetservice.domain.service.FavoriteTweetService;
 import com.twitter.tweetservice.domain.service.TweetService;
 import com.twitter.tweetservice.gateway.rest.datacontract.PaginationDataContract;
 import com.twitter.tweetservice.gateway.rest.datacontract.ResponseDataContract;
@@ -12,6 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 
@@ -21,6 +24,9 @@ public class TweetController {
 
     @Autowired
     private TweetService tweetService;
+
+    @Autowired
+    private FavoriteTweetService favoriteTweetService;
 
     @Autowired
     private ModelMapper mapper;
@@ -43,6 +49,20 @@ public class TweetController {
         return ResponseEntity.ok(tweetDataContract);
     }
 
+    @GetMapping("/{tweet_id}")
+    public ResponseEntity<ResponseDataContract> listTweetsByUser(@PathVariable(value = "tweet_id") UUID tweetId,
+                                                                 @RequestParam(value = "expand", defaultValue = "false", required = false) boolean expand) {
+        var tweet = tweetService.getTweet(tweetId);
+        TweetDto tweetDto = mapper.map(tweet, TweetDto.class);
+        if (expand) {
+            List<FavoriteTweet> likes = favoriteTweetService.listFavoritesByTweet(tweetId.toString());
+            tweetDto.setLikes(likes);
+        }
+        return ResponseEntity.ok(ResponseDataContract.builder()
+                .data(tweetDto)
+                .build());
+    }
+
     @PostMapping
     public ResponseEntity<ResponseDataContract> createTweet(@RequestBody TweetDto tweetDto) {
         Tweet tweet = tweetService.createTweet(tweetDto);
@@ -53,7 +73,6 @@ public class TweetController {
 
     @DeleteMapping("/{tweet_id}")
     public ResponseEntity deleteTweet(@PathVariable(value = "tweet_id") UUID tweeId) {
-
         tweetService.deleteTweet(tweeId);
         return ResponseEntity.noContent().build();
     }

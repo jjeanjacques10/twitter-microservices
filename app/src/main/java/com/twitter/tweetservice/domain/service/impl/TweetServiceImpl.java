@@ -33,6 +33,12 @@ public class TweetServiceImpl implements TweetService {
     }
 
     @Override
+    public Tweet getTweet(UUID tweetId) {
+        return tweetRepository.findById(tweetId)
+                .orElseThrow(() -> new TweetNotFound("Tweets not found - tweetId " + tweetId));
+    }
+
+    @Override
     public Tweet createTweet(TweetDto tweetDto) {
         Tweet tweet = Tweet.builder()
                 .id(UUID.randomUUID())
@@ -45,14 +51,10 @@ public class TweetServiceImpl implements TweetService {
 
     @Override
     public void deleteTweet(UUID tweetId) {
-        var tweet = tweetRepository.findById(tweetId);
-
-        if (!tweet.isPresent())
-            throw new TweetNotFound("Tweets not found - tweetId " + tweetId);
-
+        var tweet = tweetRepository.findById(tweetId)
+                .orElseThrow(() -> new TweetNotFound("Tweets not found - tweetId " + tweetId));
         favoriteTweetService.deleteTweet(tweetId.toString(), null);
-
-        tweetRepository.delete(tweet.get());
+        tweetRepository.delete(tweet);
     }
 
 

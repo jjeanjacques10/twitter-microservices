@@ -12,6 +12,8 @@ public interface TweetService {
 
     Page<Tweet> listTweetsByUser(String userId, Pageable pageable);
 
+    Tweet getTweet(UUID tweetId);
+
     Tweet createTweet(TweetDto tweetDto);
 
     void deleteTweet(UUID tweetId);
