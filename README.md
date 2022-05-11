@@ -1,10 +1,25 @@
-# Microservices Architecture of Twitter Service
+<br />
+<p align="center">
+  <a href="https://github.com/jjeanjacques10/twitter-microservices">
+    <img src="./files/twitter-logo.png" width="100px" alt="Logo">
+  </a>
 
-Repository to recreate the microservices architecture of Twitter. The first service created was:
+<h3 align="center">Microservices Architecture of Twitter Service</h3>
+  <p align="center">
+    Repository to recreate the microservices architecture of Twitter. 
+    <br />
+    <a href="https://github.com/jjeanjacques10/twitter-microservices"><strong>Explore the docs »</strong></a>
+    <br />
+    <br />
+    <a href="https://github.com/jjeanjacques10/twitter-microservices/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/jjeanjacques10/twitter-microservices/issues">Request Feature</a>
+  </p>
+</p>
 
 ### Tweet Service
 
-Microservice to record tweets and favorite actions.
+The first service created was Tweet Service. Microservice to record tweets and favorite actions.
 
 ## Technologies
 
@@ -49,5 +64,12 @@ article: [Design Twitter — Microservices Architecture of Twitter Service](http
 
 4. The users can mark favorite tweets (write operation).
 
+## Contact
+
+[Linkedin](https://www.linkedin.com/in/jjean-jacques10) | [Github](https://github.com/jjeanjacques10/)
+| [Medium](https://jjeanjacques10.medium.com/) | [Email](jjean.jacques10@gmail.com)
+
+Project Link: [https://github.com/jjeanjacques10/twitter-microservices](https://github.com/jjeanjacques10/twitter-microservices)
+
 ---
-Developed by [Jean Jacques](https://github.com/jjeanjacques10)
+Developed by [Jean Jacques Barros](https://github.com/jjeanjacques10)
