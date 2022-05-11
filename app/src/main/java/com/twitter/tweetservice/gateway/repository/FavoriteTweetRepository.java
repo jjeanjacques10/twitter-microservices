@@ -12,4 +12,8 @@ public interface FavoriteTweetRepository {
 
     FavoriteTweet favoriteTweet(FavoriteTweet favoriteTweet);
 
+    void deleteTweet(String tweetId);
+
+    void deleteTweet(String tweetId, String userId);
+
 }

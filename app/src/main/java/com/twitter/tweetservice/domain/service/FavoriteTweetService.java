@@ -12,4 +12,6 @@ public interface FavoriteTweetService {
     List<FavoriteTweet> listFavoritesByTweet(String tweetId);
 
     List<FavoriteTweet> listFavoritesByUser(String userId);
+
+    void deleteTweet(String tweetId, String userId);
 }

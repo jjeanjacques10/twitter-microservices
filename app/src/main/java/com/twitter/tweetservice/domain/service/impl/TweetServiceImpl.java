@@ -1,11 +1,11 @@
 package com.twitter.tweetservice.domain.service.impl;
 
 import com.twitter.tweetservice.domain.entity.Tweet;
+import com.twitter.tweetservice.domain.service.FavoriteTweetService;
 import com.twitter.tweetservice.domain.service.TweetService;
 import com.twitter.tweetservice.exception.TweetNotFound;
 import com.twitter.tweetservice.gateway.repository.TweetRepository;
 import com.twitter.tweetservice.gateway.rest.datacontract.TweetDto;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,7 +21,7 @@ public class TweetServiceImpl implements TweetService {
     private TweetRepository tweetRepository;
 
     @Autowired
-    private ModelMapper mapper;
+    private FavoriteTweetService favoriteTweetService;
 
     @Override
     public Page<Tweet> listTweetsByUser(String userId, Pageable pageable) {
@@ -33,14 +33,26 @@ public class TweetServiceImpl implements TweetService {
     }
 
     @Override
-    public void createTweet(TweetDto tweetDto) {
+    public Tweet createTweet(TweetDto tweetDto) {
         Tweet tweet = Tweet.builder()
                 .id(UUID.randomUUID())
                 .content(tweetDto.getContent())
                 .userId(tweetDto.getUserId())
                 .createdAt(LocalDateTime.now())
                 .build();
-        tweetRepository.save(tweet);
+        return tweetRepository.save(tweet);
+    }
+
+    @Override
+    public void deleteTweet(UUID tweetId) {
+        var tweet = tweetRepository.findById(tweetId);
+
+        if (!tweet.isPresent())
+            throw new TweetNotFound("Tweets not found - tweetId " + tweetId);
+
+        favoriteTweetService.deleteTweet(tweetId.toString(), null);
+
+        tweetRepository.delete(tweet.get());
     }
 
 

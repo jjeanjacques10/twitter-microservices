@@ -5,11 +5,14 @@ import com.twitter.tweetservice.gateway.rest.datacontract.TweetDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.UUID;
+
 
 public interface TweetService {
 
     Page<Tweet> listTweetsByUser(String userId, Pageable pageable);
 
-    void createTweet(TweetDto tweetDto);
+    Tweet createTweet(TweetDto tweetDto);
 
+    void deleteTweet(UUID tweetId);
 }

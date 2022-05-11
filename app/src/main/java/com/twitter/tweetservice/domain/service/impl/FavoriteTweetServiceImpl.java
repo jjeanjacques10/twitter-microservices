@@ -47,4 +47,13 @@ public class FavoriteTweetServiceImpl implements FavoriteTweetService {
         log.info("find favorite items by [{}] user", userId);
         return favoriteTweetRepository.findTweetFavoriteByUserId(userId);
     }
+
+    @Override
+    public void deleteTweet(String tweetId, String userId) {
+        if (userId != null)
+            favoriteTweetRepository.deleteTweet(tweetId, userId);
+        else
+            favoriteTweetRepository.deleteTweet(tweetId);
+    }
+
 }

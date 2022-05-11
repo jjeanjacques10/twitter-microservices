@@ -1,5 +1,6 @@
 package com.twitter.tweetservice.gateway.rest;
 
+import com.twitter.tweetservice.domain.entity.Tweet;
 import com.twitter.tweetservice.domain.service.TweetService;
 import com.twitter.tweetservice.gateway.rest.datacontract.PaginationDataContract;
 import com.twitter.tweetservice.gateway.rest.datacontract.ResponseDataContract;
@@ -10,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.UUID;
 
 
 @RestController
@@ -42,9 +45,16 @@ public class TweetController {
 
     @PostMapping
     public ResponseEntity<ResponseDataContract> createTweet(@RequestBody TweetDto tweetDto) {
-        tweetService.createTweet(tweetDto);
+        Tweet tweet = tweetService.createTweet(tweetDto);
         return ResponseEntity.ok(ResponseDataContract.builder()
-                .data("Tweet created - User " + tweetDto.getUserId())
+                .data(mapper.map(tweet, TweetDto.class))
                 .build());
+    }
+
+    @DeleteMapping("/{tweet_id}")
+    public ResponseEntity deleteTweet(@PathVariable(value = "tweet_id") UUID tweeId) {
+
+        tweetService.deleteTweet(tweeId);
+        return ResponseEntity.noContent().build();
     }
 }

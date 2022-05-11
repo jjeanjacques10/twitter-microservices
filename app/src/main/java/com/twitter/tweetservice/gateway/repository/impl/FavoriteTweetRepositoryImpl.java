@@ -18,7 +18,6 @@ import software.amazon.awssdk.services.dynamodb.model.DynamoDbException;
 import javax.annotation.PostConstruct;
 import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Slf4j
 @Repository
@@ -65,5 +64,29 @@ public class FavoriteTweetRepositoryImpl implements FavoriteTweetRepository {
             log.error("Error to favorite tweet {} - {}", favoriteTweet.getTweetId(), exception.getMessage());
             return null;
         }
+    }
+
+    @Override
+    public void deleteTweet(String tweetId) {
+        List<FavoriteTweet> tweetFavorites = findTweetFavoriteByTweetId(tweetId);
+        tweetFavorites.stream().forEach(table::deleteItem);
+    }
+
+    @Override
+    public void deleteTweet(String tweetId, String userId) {
+        List<FavoriteTweet> tweetFavorites = findTweetFavoriteItem(tweetId, userId);
+        tweetFavorites.stream().forEach(table::deleteItem);
+        table.deleteItem(Key.builder().partitionValue(tweetId).sortValue(userId).build());
+    }
+
+    private List<FavoriteTweet> findTweetFavoriteItem(String tweetId, String userId) {
+        QueryConditional queryConditional = QueryConditional
+                .keyEqualTo(Key.builder()
+                        .partitionValue(tweetId)
+                        .sortValue(userId)
+                        .build());
+
+        PageIterable<FavoriteTweet> query = table.query(r -> r.queryConditional(queryConditional));
+        return query.items().stream().toList();
     }
 }
