@@ -1,4 +1,8 @@
+server:
+  port: 8080
 spring:
+  application:
+    name: tweet-service
   datasource:
     driver-class-name: ${DRIVER_DB:com.mysql.cj.jdbc.Driver}
     username: ${USER_DB:root}
@@ -11,3 +15,8 @@ spring:
     hibernate.ddl.auto: update
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     show-sql: true
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:9000/eureka

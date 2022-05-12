@@ -21,6 +21,10 @@
 
 The first service created was Tweet Service. Microservice to record tweets and favorite actions.
 
+### Eureka Service
+
+Service Discovery, it's where I'll register my microservices.
+
 ## Technologies
 
 - Spring Boot
