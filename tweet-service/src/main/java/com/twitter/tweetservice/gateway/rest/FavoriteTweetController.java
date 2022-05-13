@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/favorite")
+@RequestMapping("/tweet/favorite")
 public class FavoriteTweetController {
 
     @Autowired

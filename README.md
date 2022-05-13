@@ -21,13 +21,22 @@
 
 The first service created was Tweet Service. Microservice to record tweets and favorite actions.
 
+### User Service
+
+Manage users profiles to control authentication and authorization actions.
+
 ### Eureka Service
 
 Service Discovery, it's where I'll register my microservices.
 
+### Gateway Service
+
+Gateway provides a flexible way of routing requests.
+
 ## Technologies
 
-- Spring Boot
+- [Spring Boot](https://spring.io/projects/spring-boot)
+- [Spring Cloud](https://spring.io/projects/spring-cloud)
 - Java 17
 - Docker
 - MySQL
@@ -73,7 +82,8 @@ article: [Design Twitter — Microservices Architecture of Twitter Service](http
 [Linkedin](https://www.linkedin.com/in/jjean-jacques10) | [Github](https://github.com/jjeanjacques10/)
 | [Medium](https://jjeanjacques10.medium.com/) | [Email](jjean.jacques10@gmail.com)
 
-Project Link: [https://github.com/jjeanjacques10/twitter-microservices](https://github.com/jjeanjacques10/twitter-microservices)
+Project
+Link: [https://github.com/jjeanjacques10/twitter-microservices](https://github.com/jjeanjacques10/twitter-microservices)
 
 ---
 Developed by [Jean Jacques Barros](https://github.com/jjeanjacques10)

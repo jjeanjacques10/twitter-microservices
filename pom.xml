@@ -21,6 +21,8 @@
     <modules>
         <module>tweet-service</module>
         <module>eureka-service</module>
+        <module>user-service</module>
+        <module>gateway-service</module>
     </modules>
 
     <dependencies>

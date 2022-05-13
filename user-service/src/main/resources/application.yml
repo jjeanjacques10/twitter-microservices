@@ -1,13 +1,13 @@
 server:
-  port: 8080
+  port: 8081
 spring:
   application:
-    name: tweet-service
+    name: user-service
   datasource:
     driver-class-name: ${DRIVER_DB:com.mysql.cj.jdbc.Driver}
     username: ${USER_DB:root}
     password: ${PASSWORD_DB:brtwcvv1}
-    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/tweet_database
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:3307/user_database
   jpa:
     defer-datasource-initialization: true
     properties.hibernate.format_sql: true
@@ -17,6 +17,20 @@ spring:
     #show-sql: true
 
 eureka:
+  instance:
+    preferIpAddress: true
   client:
     serviceUrl:
       defaultZone: http://localhost:9000/eureka
+
+jwt:
+  secret: screte-value
+  expiration: 86400000
+
+# Default user
+admin:
+  id: 1b2fe584-19b4-4173-9d3d-02acf970faa6
+  username: jjeanjacques10
+  email: jjeanjacques10@github.com
+  password: 12345
+  isHotUser: true
