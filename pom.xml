@@ -8,6 +8,7 @@
         <version>2.6.7</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
+    <packaging>pom</packaging>
     <groupId>com.twitter</groupId>
     <artifactId>twitter-microservices</artifactId>
     <version>0.0.1-SNAPSHOT</version>
@@ -47,4 +48,5 @@
             </plugin>
         </plugins>
     </build>
+
 </project>
