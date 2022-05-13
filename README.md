@@ -77,6 +77,12 @@ article: [Design Twitter — Microservices Architecture of Twitter Service](http
 
 4. The users can mark favorite tweets (write operation).
 
+## Diagrams
+
+<p align="center">
+<img src="./files/Microservices Diagram.jpg" width="700px" alt="Logo">
+</p>
+
 ## Contact
 
 [Linkedin](https://www.linkedin.com/in/jjean-jacques10) | [Github](https://github.com/jjeanjacques10/)
