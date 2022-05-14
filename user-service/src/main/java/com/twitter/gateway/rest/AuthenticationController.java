@@ -1,7 +1,7 @@
 package com.twitter.gateway.rest;
 
 import com.twitter.domain.service.impl.TokenService;
-import com.twitter.gateway.rest.datacontract.LoginForm;
+import com.twitter.gateway.rest.datacontract.LoginDataContract;
 import com.twitter.gateway.rest.datacontract.TokenDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +26,7 @@ public class AuthenticationController {
     private TokenService tokenService;
 
     @PostMapping("/login")
-    public ResponseEntity<TokenDto> autenticar(@RequestBody @Valid LoginForm form) {
+    public ResponseEntity<TokenDto> authenticate(@RequestBody @Valid LoginDataContract form) {
         UsernamePasswordAuthenticationToken dadosLogin = form.converter();
 
         try {

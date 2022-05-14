@@ -12,14 +12,15 @@ spring:
     defer-datasource-initialization: true
     properties.hibernate.format_sql: true
     generate-ddl: true
-    hibernate.ddl.auto: update
+    hibernate.ddl.auto: create
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
-    #show-sql: true
+    show-sql: true
 
 eureka:
   instance:
     preferIpAddress: true
   client:
+    enabled: false
     serviceUrl:
       defaultZone: http://localhost:9000/eureka
 

@@ -6,12 +6,12 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 
 @Getter
 @Setter
-public class LoginForm {
+public class LoginDataContract {
 
-    private String email;
+    private String username;
     private String password;
 
     public UsernamePasswordAuthenticationToken converter() {
-        return new UsernamePasswordAuthenticationToken(email, password);
+        return new UsernamePasswordAuthenticationToken(username, password);
     }
 }
