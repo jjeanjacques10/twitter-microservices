@@ -1,16 +1,19 @@
 package com.twitter.domain.service;
 
 import com.twitter.domain.entity.User;
-import com.twitter.gateway.rest.datacontract.AdminResponseDTO;
-import com.twitter.gateway.rest.datacontract.UserRequestDTO;
+import com.twitter.gateway.rest.datacontract.RegisterDataContract;
+import com.twitter.gateway.rest.datacontract.UserDTO;
+
+import java.util.List;
+import java.util.UUID;
 
 public interface UserService {
 
-    void saveAdmin(UserRequestDTO requestDTO);
+    User save(RegisterDataContract register);
 
-    AdminResponseDTO searchAdmin(UserRequestDTO requestDTO);
+    List<User> searchByUserName(String username);
 
-    User updateAdmin(UserRequestDTO requestDTO);
+    User updateUser(UUID id, UserDTO requestDTO);
 
-    User fetchAdminByUsername(String username);
+    User fetchByUsername(String username);
 }
