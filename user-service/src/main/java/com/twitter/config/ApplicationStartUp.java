@@ -2,6 +2,7 @@ package com.twitter.config;
 
 import com.twitter.domain.entity.Role;
 import com.twitter.domain.entity.User;
+import com.twitter.gateway.repository.RoleRepository;
 import com.twitter.gateway.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -21,13 +22,23 @@ public class ApplicationStartUp {
     private StartupProperties startupProperties;
 
     @Bean
-    public CommandLineRunner loadData(UserRepository userRepository) {
+    public CommandLineRunner loadData(UserRepository userRepository, RoleRepository roleRepository) {
         return (args) -> {
             List<User> users = userRepository.findAll();
 
-            if (ObjectUtils.isEmpty(users))
+            if (ObjectUtils.isEmpty(users)) {
+                roleRepository.save(saveRole(1L, "ADMIN"));
+                roleRepository.save(saveRole(2L, "USER"));
                 userRepository.save(saveUser());
+            }
         };
+    }
+
+    public Role saveRole(Long id, String name) {
+        return new Role().builder()
+                .id(id)
+                .name(name)
+                .build();
     }
 
     public User saveUser() {
@@ -36,15 +47,13 @@ public class ApplicationStartUp {
                 .name("ADMIN")
                 .build();
 
-        User user = new User();
-        user.setUsername(startupProperties.getUsername());
-        user.setEmail(startupProperties.getEmail());
-        user.setPassword(BCrypt.hashpw(startupProperties.getPassword(), BCrypt.gensalt()));
-        user.setCreatedAt(LocalDateTime.now());
-        user.setLastLoginTime(LocalDateTime.now());
-        user.setIsHotUser(true);
-        user.setRoles(Arrays.asList(role));
-
-        return user;
+        return User.builder()
+                .username(startupProperties.getUsername())
+                .email(startupProperties.getEmail())
+                .password(BCrypt.hashpw(startupProperties.getPassword(), BCrypt.gensalt()))
+                .createdAt(LocalDateTime.now())
+                .lastLoginTime(LocalDateTime.now())
+                .isHotUser(true)
+                .roles(Arrays.asList(role)).build();
     }
 }

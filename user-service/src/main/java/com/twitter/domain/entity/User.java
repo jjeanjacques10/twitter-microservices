@@ -4,7 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
+import org.hibernate.id.UUIDGenerator;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -23,17 +25,17 @@ import java.util.UUID;
 @AllArgsConstructor
 @Table(name = "User")
 public class User implements UserDetails {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     @Type(type = "org.hibernate.type.UUIDCharType")
     @Column(nullable = false, length = 36)
     private UUID id;
 
-    @Column(name = "username")
+    @Column(name = "username", length = 100, unique = true)
     private String username;
 
-    @Column(name = "email", length = 200)
+    @Column(name = "email", length = 200, unique = true)
     private String email;
 
     @Column(name = "password")
@@ -48,8 +50,8 @@ public class User implements UserDetails {
     @Column(name = "is_hot_user")
     private Boolean isHotUser;
 
-    @ElementCollection(fetch = FetchType.EAGER)
-    @Builder.Default
+    @ManyToMany(fetch = FetchType.EAGER)
+    //@Builder.Default
     private List<Role> roles = new ArrayList();
 
     @Override
