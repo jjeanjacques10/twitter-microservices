@@ -54,6 +54,9 @@ public class User implements UserDetails {
     //@Builder.Default
     private List<Role> roles = new ArrayList();
 
+    @OneToMany(mappedBy = "followerId")
+    private List<Relationship> follows;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return roles;
