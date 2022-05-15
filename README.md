@@ -38,9 +38,11 @@ Gateway provides a flexible way of routing requests.
 - [Spring Boot](https://spring.io/projects/spring-boot)
 - [Spring Cloud](https://spring.io/projects/spring-cloud)
 - Java 17
+- Kotlin
 - Docker
 - MySQL
 - DynamoDB
+- Redis
 
 ## Get Started
 
@@ -86,7 +88,7 @@ article: [Design Twitter — Microservices Architecture of Twitter Service](http
 ## Contact
 
 [Linkedin](https://www.linkedin.com/in/jjean-jacques10) | [Github](https://github.com/jjeanjacques10/)
-| [Medium](https://jjeanjacques10.medium.com/) | [Email](jjean.jacques10@gmail.com)
+| [Medium](https://jjeanjacques10.medium.com/) | [Email](mail:jjean.jacques10@gmail.com)
 
 Project
 Link: [https://github.com/jjeanjacques10/twitter-microservices](https://github.com/jjeanjacques10/twitter-microservices)

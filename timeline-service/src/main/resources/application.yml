@@ -1,0 +1,17 @@
+server:
+  port: 8083
+spring:
+  application:
+    name: timeline-service
+  redis:
+    database: 0
+    host: localhost
+    port: 6379
+    password: eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
+    timeout: 60000
+
+eureka:
+  client:
+    enabled: false
+    serviceUrl:
+      defaultZone: http://localhost:9000/eureka
