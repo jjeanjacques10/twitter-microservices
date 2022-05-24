@@ -2,7 +2,8 @@
 	"info": {
 		"_postman_id": "a3641778-6d3f-43a9-bb98-e2d69ecf6526",
 		"name": "Twitter",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3186711"
 	},
 	"item": [
 		{
@@ -19,7 +20,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBUEkgVHdpdHRlciIsInN1YiI6ImY1YjYyZjM0LTNmOGYtNDViYi04Yjc2LTU2ODBjZTI0YTlhYyIsImlhdCI6MTY1MjQwNTA2MSwiZXhwIjoxNjUyNDkxNDYxfQ.dfveihFFeJ4YhTH17YQgYq8eitqWthyPdAObHi42_7s",
+									"value": "{{token}}",
 									"type": "string"
 								}
 							]
@@ -36,7 +37,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_url}}/tweet?user_id=a3423720-e87f-4002-bde4-525dd3320b36&size=5",
+							"raw": "{{base_url}}/tweet?size=5&user_id=a3423720-e87f-4002-bde4-525dd3320b36",
 							"host": [
 								"{{base_url}}"
 							],
@@ -45,10 +46,6 @@
 							],
 							"query": [
 								{
-									"key": "user_id",
-									"value": "a3423720-e87f-4002-bde4-525dd3320b36"
-								},
-								{
 									"key": "size",
 									"value": "5"
 								},
@@ -56,6 +53,10 @@
 									"key": "page",
 									"value": "1",
 									"disabled": true
+								},
+								{
+									"key": "user_id",
+									"value": "a3423720-e87f-4002-bde4-525dd3320b36"
 								}
 							]
 						}
@@ -65,11 +66,21 @@
 				{
 					"name": "Create Tweet",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": " {\r\n    \"userId\": \"a3423720-e87f-4002-bde4-525dd3320b36\",\r\n    \"content\": \"Eu gosto de Pokemon\"\r\n}",
+							"raw": " {\r\n    \"userId\": \"a3423720-e87f-4002-bde4-525dd3320b36\",\r\n    \"content\": \"Eu gosto de JoJO\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -91,6 +102,16 @@
 				{
 					"name": "Delete Tweet",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [],
 						"body": {
@@ -127,6 +148,16 @@
 						"disableBodyPruning": true
 					},
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"body": {
@@ -176,7 +207,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBUEkgVHdpdHRlciIsInN1YiI6ImY1YjYyZjM0LTNmOGYtNDViYi04Yjc2LTU2ODBjZTI0YTlhYyIsImlhdCI6MTY1MjQwNTA2MSwiZXhwIjoxNjUyNDkxNDYxfQ.dfveihFFeJ4YhTH17YQgYq8eitqWthyPdAObHi42_7s",
+									"value": "{{token}}",
 									"type": "string"
 								}
 							]
@@ -221,6 +252,16 @@
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -264,13 +305,196 @@
 			"name": "User",
 			"item": [
 				{
+					"name": "Follow",
+					"item": [
+						{
+							"name": "Follow following",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"jjeanjacques11\",\r\n    \"email\": \"jjeanjacques11@gmail.com\",\r\n    \"password\": \"1234225\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/user/follow/00cc8485-e281-4faf-b37b-0c34ed33da4e/following",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"user",
+										"follow",
+										"00cc8485-e281-4faf-b37b-0c34ed33da4e",
+										"following"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Follow followers",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"jjeanjacques11\",\r\n    \"email\": \"jjeanjacques11@gmail.com\",\r\n    \"password\": \"1234225\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/user/follow/00cc8485-e281-4faf-b37b-0c34ed33da4e/followers",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"user",
+										"follow",
+										"00cc8485-e281-4faf-b37b-0c34ed33da4e",
+										"followers"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Follow",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"followerId\": \"401d1f45-8a24-407c-b93e-05eeab1282d6\",\r\n    \"followedId\": \"a3423720-e87f-4002-bde4-525dd3320b36\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/user/follow",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"user",
+										"follow"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Follow Copy",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"followerId\": \"00cc8485-e281-4faf-b37b-0c34ed33da4e\",\r\n    \"followedId\": \"2dd48fa5-c953-4546-8671-6448caa1b764\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/user/follow",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"user",
+										"follow"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
 					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.collectionVariables.set(\"token\", jsonData.token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"jjeanjacques10\",\r\n    \"password\": \"12345\"\r\n}",
+							"raw": "{\r\n    \"username\": \"jjeanjacques10\",\r\n    \"password\": \"12345\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -332,7 +556,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJmNWI2MmYzNC0zZjhmLTQ1YmItOGI3Ni01NjgwY2UyNGE5YWMiLCJpYXQiOjE2NTI0MTA2ODgsImV4cCI6MTY1MjQ5NzA4OH0.TJZJONjRGvLT6PY2k2hFZoBBXUMp8ZBiu5HC-yaim7U",
+									"value": "{{token}}",
 									"type": "string"
 								}
 							]
@@ -340,7 +564,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/user/search?username=jjeanjacque",
+							"raw": "{{base_url}}/user/search?username=jjeanjacques10",
 							"host": [
 								"{{base_url}}"
 							],
@@ -351,7 +575,7 @@
 							"query": [
 								{
 									"key": "username",
-									"value": "jjeanjacque"
+									"value": "jjeanjacques10"
 								}
 							]
 						}
@@ -369,7 +593,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJmNWI2MmYzNC0zZjhmLTQ1YmItOGI3Ni01NjgwY2UyNGE5YWMiLCJpYXQiOjE2NTI0MTA2ODgsImV4cCI6MTY1MjQ5NzA4OH0.TJZJONjRGvLT6PY2k2hFZoBBXUMp8ZBiu5HC-yaim7U",
+									"value": "{{token}}",
 									"type": "string"
 								}
 							]
@@ -402,11 +626,54 @@
 			]
 		},
 		{
+			"name": "Timeline",
+			"item": [
+				{
+					"name": "Timeline",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/timeline/2dd48fa5-c953-4546-8671-6448caa1b764",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"timeline",
+								"2dd48fa5-c953-4546-8671-6448caa1b764"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Actuator",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"body": {
@@ -462,7 +729,12 @@
 	"variable": [
 		{
 			"key": "base_url",
-			"value": "localhost:8080",
+			"value": "localhost:9002",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "",
 			"type": "string"
 		}
 	]

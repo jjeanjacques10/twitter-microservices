@@ -18,5 +18,14 @@ spring:
 
 eureka:
   client:
+    enabled: true
     serviceUrl:
       defaultZone: http://localhost:9000/eureka
+
+cloud:
+  aws:
+    stack:
+      auto: false
+    #region: us-east-1
+    sqs:
+      url: http://localhost:4576

@@ -33,6 +33,10 @@ Service Discovery, it's where I'll register my microservices.
 
 Gateway provides a flexible way of routing requests.
 
+### Timeline Service
+
+Service to listener new tweets created and generate users' timeline in Redis
+
 ## Technologies
 
 - [Spring Boot](https://spring.io/projects/spring-boot)
@@ -41,8 +45,10 @@ Gateway provides a flexible way of routing requests.
 - Kotlin
 - Docker
 - MySQL
-- DynamoDB
 - Redis
+- Localstack
+  - DynamoDB
+  - SQS
 
 ## Get Started
 
@@ -78,6 +84,8 @@ article: [Design Twitter — Microservices Architecture of Twitter Service](http
 3. A user can delete his tweets but not update/edit his posted tweets (this is a write operation).
 
 4. The users can mark favorite tweets (write operation).
+
+5. Each user have a personalized timeline with must recent tweets
 
 ## Diagrams
 
