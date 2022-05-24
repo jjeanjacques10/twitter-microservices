@@ -4,6 +4,8 @@ import com.twitter.tweetservice.domain.entity.FavoriteTweet;
 import com.twitter.tweetservice.domain.entity.Tweet;
 import com.twitter.tweetservice.domain.service.FavoriteTweetService;
 import com.twitter.tweetservice.domain.service.TweetService;
+import com.twitter.tweetservice.gateway.producer.TimelineProducer;
+import com.twitter.tweetservice.gateway.producer.contract.TimelineMessage;
 import com.twitter.tweetservice.gateway.rest.datacontract.PaginationDataContract;
 import com.twitter.tweetservice.gateway.rest.datacontract.ResponseDataContract;
 import com.twitter.tweetservice.gateway.rest.datacontract.TweetDataContract;
@@ -27,6 +29,9 @@ public class TweetController {
 
     @Autowired
     private FavoriteTweetService favoriteTweetService;
+
+    @Autowired
+    private TimelineProducer timelineProducer;
 
     @Autowired
     private ModelMapper mapper;
@@ -66,6 +71,9 @@ public class TweetController {
     @PostMapping
     public ResponseEntity<ResponseDataContract> createTweet(@RequestBody TweetDto tweetDto) {
         Tweet tweet = tweetService.createTweet(tweetDto);
+
+        timelineProducer.send(TimelineMessage.builder().userId(tweet.getUserId()).tweet(tweet).build());
+
         return ResponseEntity.ok(ResponseDataContract.builder()
                 .data(mapper.map(tweet, TweetDto.class))
                 .build());

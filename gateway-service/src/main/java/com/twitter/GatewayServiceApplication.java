@@ -27,7 +27,11 @@ public class GatewayServiceApplication {
     public RouteLocator myRoutes(RouteLocatorBuilder builder) {
         return builder.routes()
                 .route(r -> r
-                        .path("/auth/**", "/user/**")
+                        .path("/auth/**")
+                        .filters(f -> f.filter(filter))
+                        .uri("lb://USER-SERVICE"))
+                .route(r -> r
+                        .path("/user/**")
                         .filters(f -> f.filter(filter))
                         .uri("lb://USER-SERVICE"))
                 .route(p -> p
