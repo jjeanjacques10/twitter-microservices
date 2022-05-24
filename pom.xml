@@ -24,6 +24,7 @@
         <module>eureka-service</module>
         <module>user-service</module>
         <module>gateway-service</module>
+        <module>timeline-service</module>
     </modules>
 
     <dependencies>

@@ -58,6 +58,18 @@ services:
     command: redis-server --save 20 1 --loglevel warning --requirepass eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
     volumes:
       - my-db-timeline:/data
+  sqs-local:
+    image: localstack/localstack:latest
+    restart: always
+    environment:
+      - AWS_DEFAULT_REGION=us-west-1
+      - EDGE_PORT=4576
+      - SERVICES=sqs
+    ports:
+      - '4576:4576'
+    volumes:
+      - "${TMPDIR:-/tmp/localstack}:/tmp/localstack"
+      - "/var/run/docker.sock:/var/run/docker.sock"
 
 volumes:
   my-db-tweet:

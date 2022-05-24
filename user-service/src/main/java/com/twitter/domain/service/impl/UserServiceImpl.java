@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Slf4j
@@ -32,6 +33,13 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public User save(RegisterDataContract register) {
+        Optional<User> userExists = Optional.of(userRepository.findByUsername(register.getUsername()))
+                .or(() -> Optional.of(userRepository.findByEmail(register.getEmail())))
+                .orElse(null);
+
+        if (userExists != null)
+            throw new IllegalArgumentException("User " + register.getUsername() + " " + register.getEmail() + " already exists");
+
         var user = mapper.map(register, User.class);
         user.setIsHotUser(true);
         user.setCreatedAt(LocalDateTime.now());
