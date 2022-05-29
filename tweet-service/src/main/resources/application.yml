@@ -7,7 +7,7 @@ spring:
     driver-class-name: ${DRIVER_DB:com.mysql.cj.jdbc.Driver}
     username: ${USER_DB:root}
     password: ${PASSWORD_DB:brtwcvv1}
-    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/tweet_database
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/tweet_database?useSSL=false
   jpa:
     defer-datasource-initialization: true
     properties.hibernate.format_sql: true
@@ -20,12 +20,14 @@ eureka:
   client:
     enabled: true
     serviceUrl:
-      defaultZone: http://localhost:9000/eureka
+      defaultZone: http://${EUREKA_URL:localhost}:9000/eureka
 
 cloud:
   aws:
     stack:
       auto: false
-    #region: us-east-1
+      enabled: false
+    region:
+      static: us-west-1
     sqs:
-      url: http://localhost:4576
+      url: http://${SQS_URL:localhost}:4576

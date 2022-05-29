@@ -7,11 +7,13 @@ import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer
 import java.time.LocalDateTime
 import java.util.*
 
-class Tweet(
-    val id: UUID? = null,
-    val userId: String? = null,
+class Tweet {
+    var id: UUID? = null
+    var userId: String? = null
+
     @JsonSerialize(using = LocalDateTimeSerializer::class)
     @JsonDeserialize(using = LocalDateTimeDeserializer::class)
-    val createdAt: LocalDateTime? = null,
-    val content: String? = null
-) {}
+    var createdAt: LocalDateTime? = null
+
+    var content: String? = null
+}

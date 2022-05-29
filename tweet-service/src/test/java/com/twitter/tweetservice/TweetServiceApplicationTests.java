@@ -3,10 +3,10 @@ package com.twitter.tweetservice;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
+//@SpringBootTest
 class TweetServiceApplicationTests {
 
-	@Test
+	//@Test
 	void contextLoads() {
 	}
 

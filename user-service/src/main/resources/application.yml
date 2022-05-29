@@ -7,7 +7,7 @@ spring:
     driver-class-name: ${DRIVER_DB:com.mysql.cj.jdbc.Driver}
     username: ${USER_DB:root}
     password: ${PASSWORD_DB:brtwcvv1}
-    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/user_database?useSSL=false
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:3307/user_database?useSSL=false
   jpa:
     defer-datasource-initialization: true
     properties.hibernate.format_sql: true

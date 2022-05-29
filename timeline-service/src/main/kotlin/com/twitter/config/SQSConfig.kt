@@ -3,7 +3,6 @@ package com.twitter.config
 import com.amazonaws.client.builder.AwsClientBuilder
 import com.amazonaws.services.sqs.AmazonSQSAsync
 import com.amazonaws.services.sqs.AmazonSQSAsyncClientBuilder
-import com.fasterxml.jackson.databind.ObjectMapper
 import io.awspring.cloud.messaging.config.QueueMessageHandlerFactory
 import io.awspring.cloud.messaging.core.QueueMessagingTemplate
 import io.awspring.cloud.messaging.listener.QueueMessageHandler
@@ -59,11 +58,6 @@ class SQSConfig {
     @Bean
     fun queueMessagingTemplate(): QueueMessagingTemplate? {
         return QueueMessagingTemplate(amazonSQSAsync())
-    }
-
-    @Bean
-    fun objectMapper(): ObjectMapper? {
-        return ObjectMapper()
     }
 
     companion object {

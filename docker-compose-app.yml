@@ -37,22 +37,25 @@ services:
     depends_on:
       - eureka-service
       - gateway-service
-#  tweet-service:
-#    container_name: tweet-service
-#    build: ./tweet-service
-#    networks:
-#      - twitter-network
-#    ports:
-#      - '8080:8080'
-#    environment:
-#      - MYSQL_HOST=database-tweet
-#      - SQS_URL=sqs-local
-#      - EUREKA_URL=eureka-service
-#    links:
-#      - "eureka-service"
-#    depends_on:
-#      - eureka-service
-#      - gateway-service
+  tweet-service:
+    container_name: tweet-service
+    build: ./tweet-service
+    networks:
+      - twitter-network
+    ports:
+      - '8080:8080'
+    environment:
+      - MYSQL_HOST=database-tweet
+      - SQS_URL=sqs-local
+      - EUREKA_URL=eureka-service
+      - AWS_REGION=us-west-1
+      - AWS_ACCESS_KEY=admin
+      - AWS_SECRET_ACCESS_KEY=admin
+    links:
+      - "eureka-service"
+    depends_on:
+      - eureka-service
+      - gateway-service
   timeline-service:
     container_name: timeline-service
     build: ./timeline-service
