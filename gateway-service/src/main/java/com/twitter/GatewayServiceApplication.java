@@ -38,6 +38,10 @@ public class GatewayServiceApplication {
                         .path("/tweet/**")
                         .filters(f -> f.filter(filter))
                         .uri("lb://TWEET-SERVICE"))
+                .route(p -> p
+                        .path("/timeline/**")
+                        .filters(f -> f.filter(filter))
+                        .uri("lb://TIMELINE-SERVICE"))
                 .build();
     }
 }

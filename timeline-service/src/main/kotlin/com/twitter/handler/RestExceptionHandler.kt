@@ -2,33 +2,31 @@ package com.twitter.handler
 
 import com.twitter.exception.ExceptionDetails
 import com.twitter.exception.TimelineNotFound
-import lombok.extern.slf4j.Slf4j
+import io.micrometer.core.lang.Nullable
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
-import org.springframework.lang.Nullable
 import org.springframework.web.bind.annotation.ControllerAdvice
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.context.request.WebRequest
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler
 import java.time.LocalDateTime
 
-
-@Slf4j
 @ControllerAdvice
 class RestExceptionHandler : ResponseEntityExceptionHandler() {
 
     @ExceptionHandler(value = [(TimelineNotFound::class)])
-    fun handleTimelineNotFound(ex: TimelineNotFound): ResponseEntity<ExceptionDetails> {
-        val resourceNotFoundDetails = ExceptionDetails(
-            timestamp = LocalDateTime.now(),
+    fun handleTimelineNotFound(ex: TimelineNotFound): ResponseEntity<Any> = createResponse(
+        ExceptionDetails(
+            timestamp = LocalDateTime.now().toString(),
             status = HttpStatus.NOT_FOUND.value(),
             title = "Resource not Found",
-            details = ex.message,
+            details = ex.message ?: "",
             developerMethod = ex.javaClass.name
-        )
-        return ResponseEntity<ExceptionDetails>(resourceNotFoundDetails, HttpStatus.NOT_FOUND)
-    }
+        ), HttpStatus.NOT_FOUND, null
+    )
 
     @ExceptionHandler
     override fun handleExceptionInternal(
@@ -37,15 +35,27 @@ class RestExceptionHandler : ResponseEntityExceptionHandler() {
         headers: HttpHeaders,
         status: HttpStatus,
         request: WebRequest
-    ): ResponseEntity<Any> {
-        val exceptionDetails = ExceptionDetails(
-            timestamp = LocalDateTime.now(),
+    ): ResponseEntity<Any> = createResponse(
+        ExceptionDetails(
+            timestamp = LocalDateTime.now().toString(),
             status = status.value(),
-            title = ex.cause!!.message,
-            details = ex.message,
+            title = ex.cause?.message ?: "",
+            details = ex.message ?: "",
             developerMethod = ex.javaClass.name
-        )
-        return ResponseEntity(exceptionDetails, headers, status)
+        ), status, headers
+    )
+
+    private fun createResponse(
+        details: ExceptionDetails,
+        status: HttpStatus,
+        headers: HttpHeaders?
+    ): ResponseEntity<Any> {
+        log.error(details.details)
+        return ResponseEntity<Any>(details, headers, status)
+    }
+
+    companion object {
+        val log: Logger = LoggerFactory.getLogger(this::class.java)
     }
 
 }

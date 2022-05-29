@@ -1,6 +1,5 @@
 package com.twitter.gateway.rest
 
-import com.twitter.domain.entity.Timeline
 import com.twitter.domain.service.TimelineService
 import com.twitter.gateway.rest.datacontract.ResponseDataContract
 import org.springframework.beans.factory.annotation.Autowired
@@ -19,7 +18,7 @@ class TimelineController {
     lateinit var timelineService: TimelineService
 
     @GetMapping("/{userId}")
-    fun getTimeline(@PathVariable("userId") userId: UUID): ResponseEntity<ResponseDataContract<Timeline>> {
+    fun getTimeline(@PathVariable("userId") userId: UUID): ResponseEntity<Any> {
         var timeline = timelineService.findTimelineByUser(userId)
         return ResponseEntity.ok(ResponseDataContract(data = timeline))
     }

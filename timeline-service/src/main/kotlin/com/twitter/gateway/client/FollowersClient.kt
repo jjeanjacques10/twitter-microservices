@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
 
 
-@FeignClient(value = "user-followers", url = "http://localhost:8081")
+@FeignClient(value = "user-followers", url = "\${client.user-followers.url}")
 interface FollowersClient {
     @RequestMapping(method = [RequestMethod.GET], value = ["/user/follow/{userId}/followers"])
     fun getFollowers(@PathVariable userId: String?): FollowersDataContract?

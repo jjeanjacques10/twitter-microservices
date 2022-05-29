@@ -1,0 +1,80 @@
+version: '3.1'
+services:
+  eureka-service:
+    container_name: eureka-service
+    build: ./eureka-service
+    restart: always
+    networks:
+      - twitter-network
+    ports:
+      - '9000:9000'
+  gateway-service:
+    container_name: gateway-service
+    build: ./gateway-service
+    restart: always
+    networks:
+      - twitter-network
+    ports:
+      - '9002:9002'
+    environment:
+      - EUREKA_URL=eureka-service
+    links:
+      - "eureka-service"
+    depends_on:
+      - eureka-service
+  user-service:
+    container_name: user-service
+    build: ./user-service
+    networks:
+      - twitter-network
+    ports:
+      - '8081:8081'
+    environment:
+      - MYSQL_HOST=database-user
+      - EUREKA_URL=eureka-service
+    links:
+      - "eureka-service"
+    depends_on:
+      - eureka-service
+      - gateway-service
+#  tweet-service:
+#    container_name: tweet-service
+#    build: ./tweet-service
+#    networks:
+#      - twitter-network
+#    ports:
+#      - '8080:8080'
+#    environment:
+#      - MYSQL_HOST=database-tweet
+#      - SQS_URL=sqs-local
+#      - EUREKA_URL=eureka-service
+#    links:
+#      - "eureka-service"
+#    depends_on:
+#      - eureka-service
+#      - gateway-service
+  timeline-service:
+    container_name: timeline-service
+    build: ./timeline-service
+    networks:
+      - twitter-network
+    ports:
+      - '8083:8083'
+    environment:
+      - REDIS_URL=redis-timeline
+      - SQS_URL=sqs-local
+      - USER_URL=user-service
+      - EUREKA_URL=eureka-service
+      - AWS_REGION=us-west-1
+      - AWS_ACCESS_KEY=admin
+      - AWS_SECRET_ACCESS_KEY=admin
+    links:
+      - "eureka-service"
+      - "user-service"
+    depends_on:
+      - eureka-service
+      - gateway-service
+      - user-service
+
+networks:
+  twitter-network:

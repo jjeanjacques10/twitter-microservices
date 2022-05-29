@@ -4,6 +4,8 @@ services:
     container_name: database-tweet
     image: mysql:5.7
     restart: always
+    networks:
+      - twitter-network
     environment:
       MYSQL_DATABASE: 'tweet_database'
       MYSQL_USER: 'tweet_user'
@@ -17,6 +19,8 @@ services:
     container_name: database-user
     image: mysql:5.7
     restart: always
+    networks:
+      - twitter-network
     environment:
       MYSQL_DATABASE: 'user_database'
       MYSQL_USER: 'jjeanjacques'
@@ -26,9 +30,30 @@ services:
       - '3307:3306'
     volumes:
       - my-db-user:/var/lib/mysql
-  dynamodb-local:
+  sqs-local:
+    container_name: sqs-local
     image: localstack/localstack:latest
     restart: always
+    networks:
+      - twitter-network
+    environment:
+      - AWS_DEFAULT_REGION=us-west-1
+      - EDGE_PORT=4576
+      - SERVICES=sqs
+      - HOSTNAME=localhost
+      - HOSTNAME_EXTERNAL=sqs-local # change to "localhost" when running without docker
+    ports:
+      - '4576:4576'
+    volumes:
+      - "${TMPDIR:-/tmp/localstack}:/tmp/localstack"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - ./environment/sqs/:/docker-entrypoint-initaws.d/
+  dynamodb-local:
+    container_name: dynamodb-local
+    image: localstack/localstack:latest
+    restart: always
+    networks:
+      - twitter-network
     environment:
       - AWS_DEFAULT_REGION=us-west-1
       - EDGE_PORT=4566
@@ -40,38 +65,35 @@ services:
       - "${TMPDIR:-/tmp/localstack}:/tmp/localstack"
       - "/var/run/docker.sock:/var/run/docker.sock"
   dynamodb-admin:
+    container_name: dynamodb-admin
     image: aaronshaf/dynamodb-admin
     ports:
       - "8001:8001"
+    networks:
+      - twitter-network
     environment:
-      DYNAMO_ENDPOINT: "http://dynamodb-local:4566"
-      AWS_REGION: "us-west-1"
-      AWS_ACCESS_KEY_ID: local
-      AWS_SECRET_ACCESS_KEY: local
+      - DYNAMO_ENDPOINT=http://dynamodb-local:4566
+      - AWS_REGION=us-west-1
+      - AWS_ACCESS_KEY=admin
+      - AWS_SECRET_ACCESS_KEY=admin
     depends_on:
       - dynamodb-local
   redis-timeline:
+    container_name: redis-timeline
     image: redis:6.2-alpine
     restart: always
+    networks:
+      - twitter-network
     ports:
       - '6379:6379'
     command: redis-server --save 20 1 --loglevel warning --requirepass eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
     volumes:
       - my-db-timeline:/data
-  sqs-local:
-    image: localstack/localstack:latest
-    restart: always
-    environment:
-      - AWS_DEFAULT_REGION=us-west-1
-      - EDGE_PORT=4576
-      - SERVICES=sqs
-    ports:
-      - '4576:4576'
-    volumes:
-      - "${TMPDIR:-/tmp/localstack}:/tmp/localstack"
-      - "/var/run/docker.sock:/var/run/docker.sock"
 
 volumes:
   my-db-tweet:
   my-db-user:
   my-db-timeline:
+
+networks:
+  twitter-network:
