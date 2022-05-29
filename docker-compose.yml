@@ -50,7 +50,7 @@ services:
       - ./environment/sqs/:/docker-entrypoint-initaws.d/
   dynamodb-local:
     container_name: dynamodb-local
-    image: localstack/localstack:latest
+    build: ./environment/dynamodb
     restart: always
     networks:
       - twitter-network
@@ -64,6 +64,7 @@ services:
     volumes:
       - "${TMPDIR:-/tmp/localstack}:/tmp/localstack"
       - "/var/run/docker.sock:/var/run/docker.sock"
+      - ./environment/dynamodb/:/docker-entrypoint-initaws.d/
   dynamodb-admin:
     container_name: dynamodb-admin
     image: aaronshaf/dynamodb-admin
