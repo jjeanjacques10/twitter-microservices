@@ -60,6 +60,8 @@ services:
       - EDGE_PORT=4566
       - SERVICES=dynamodb
       - KINESIS_PROVIDER=kinesalite
+      - HOSTNAME=localhost
+      - HOSTNAME_EXTERNAL=dynamodb-local # change to "localhost" when running without docker
     ports:
       - '4566:4566'
     volumes:

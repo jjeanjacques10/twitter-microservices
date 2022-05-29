@@ -47,8 +47,10 @@ services:
     environment:
       - MYSQL_HOST=database-tweet
       - SQS_URL=sqs-local
+      - DYNAMODB_URL=dynamodb-local
       - EUREKA_URL=eureka-service
       - AWS_REGION=us-west-1
+      - AWS_ACCESS_KEY_ID=admin
       - AWS_ACCESS_KEY=admin
       - AWS_SECRET_ACCESS_KEY=admin
     links:

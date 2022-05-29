@@ -26,8 +26,9 @@ cloud:
   aws:
     stack:
       auto: false
-      enabled: false
     region:
       static: us-west-1
     sqs:
       url: http://${SQS_URL:localhost}:4576
+    dynamodb:
+      url: http://${DYNAMODB_URL:localhost}:4566
