@@ -9,6 +9,8 @@ eureka:
     fetch-registry: false
     serviceUrl:
       defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+      non-secure-port: 80
+      secure-port: 443
 
   server:
     eviction-interval-timer-in-ms: 1000
