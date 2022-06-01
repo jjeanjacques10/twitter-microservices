@@ -20,7 +20,7 @@ eureka:
   client:
     enabled: true
     serviceUrl:
-      defaultZone: http://${EUREKA_URL:localhost}:9000/eureka
+      defaultZone: ${EUREKA_URL:http://localhost:9000/eureka}
 
 cloud:
   aws:

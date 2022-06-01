@@ -17,7 +17,7 @@ services:
     ports:
       - '9002:9002'
     environment:
-      - EUREKA_URL=eureka-service
+      - EUREKA_URL=http://eureka-service:9000/eureka
     links:
       - "eureka-service"
     depends_on:
@@ -31,7 +31,7 @@ services:
       - '8081:8081'
     environment:
       - MYSQL_HOST=database-user
-      - EUREKA_URL=eureka-service
+      - EUREKA_URL=http://eureka-service:9000/eureka
     links:
       - "eureka-service"
     depends_on:
@@ -48,7 +48,7 @@ services:
       - MYSQL_HOST=database-tweet
       - SQS_URL=sqs-local
       - DYNAMODB_URL=dynamodb-local
-      - EUREKA_URL=eureka-service
+      - EUREKA_URL=http://eureka-service:9000/eureka
       - AWS_REGION=us-west-1
       - AWS_ACCESS_KEY_ID=admin
       - AWS_ACCESS_KEY=admin
@@ -69,7 +69,7 @@ services:
       - REDIS_URL=redis-timeline
       - SQS_URL=sqs-local
       - USER_URL=user-service
-      - EUREKA_URL=eureka-service
+      - EUREKA_URL=http://eureka-service:9000/eureka
       - AWS_REGION=us-west-1
       - AWS_ACCESS_KEY=admin
       - AWS_SECRET_ACCESS_KEY=admin
