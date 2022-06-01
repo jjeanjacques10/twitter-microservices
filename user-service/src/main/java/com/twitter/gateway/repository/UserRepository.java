@@ -12,10 +12,10 @@ import java.util.UUID;
 @Repository
 public interface UserRepository extends JpaRepository<User, UUID> {
 
-    Optional<User> findByUsername(String usename);
+    Optional<User> findByUsername(String username);
 
     Optional<User> findByEmail(String email);
 
-    @Query("SELECT u FROM Users u WHERE u.username LIKE %:username%")
+    @Query("SELECT u FROM User u WHERE u.username LIKE %:username%")
     List<User> findByUsernameContaining(String username);
 }
