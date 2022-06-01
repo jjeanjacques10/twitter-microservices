@@ -2,8 +2,8 @@ server:
   port: 9000
 eureka:
   instance:
-    hostname: localhost
-    #prefer-ip-address: true
+    hostname: ${HOSTNAME_EUREKA:localhost}
+    prefer-ip-address: true
   client:
     register-with-eureka: false
     fetch-registry: false
