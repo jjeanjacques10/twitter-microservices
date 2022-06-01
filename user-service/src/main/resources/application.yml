@@ -7,13 +7,13 @@ spring:
     driver-class-name: ${DRIVER_DB:com.mysql.cj.jdbc.Driver}
     username: ${USER_DB:root}
     password: ${PASSWORD_DB:brtwcvv1}
-    url: jdbc:mysql://${MYSQL_HOST:localhost}:3307/user_database?useSSL=false
+    url: ${DATABASE_URL:jdbc:mysql://localhost:3307/user_database?useSSL=false}
   jpa:
     defer-datasource-initialization: true
     properties.hibernate.format_sql: true
     generate-ddl: true
     hibernate.ddl.auto: update
-    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    database-platform: ${DIALECT_DB:org.hibernate.dialect.MySQL5InnoDBDialect}
     #show-sql: true
 
 eureka:

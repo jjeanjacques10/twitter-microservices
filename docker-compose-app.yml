@@ -30,7 +30,7 @@ services:
     ports:
       - '8081:8081'
     environment:
-      - MYSQL_HOST=database-user
+      - DATABASE_URL=jdbc:mysql://database-user:3307/user_database?useSSL=false
       - EUREKA_URL=http://eureka-service:9000/eureka
     links:
       - "eureka-service"
@@ -45,7 +45,7 @@ services:
     ports:
       - '8080:8080'
     environment:
-      - MYSQL_HOST=database-tweet
+      - DATABASE_URL=jdbc:mysql://database-tweet:3306/user_database?useSSL=false
       - SQS_URL=sqs-local
       - DYNAMODB_URL=dynamodb-local
       - EUREKA_URL=http://eureka-service:9000/eureka
