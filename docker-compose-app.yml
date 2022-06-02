@@ -68,7 +68,7 @@ services:
     environment:
       - REDIS_URL=redis-timeline
       - SQS_URL=sqs-local
-      - USER_URL=user-service
+      - USER_URL=http://user-service:8081
       - EUREKA_URL=http://eureka-service:9000/eureka
       - AWS_REGION=us-west-1
       - AWS_ACCESS_KEY=admin

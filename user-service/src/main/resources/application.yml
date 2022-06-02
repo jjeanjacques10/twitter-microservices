@@ -1,5 +1,5 @@
 server:
-  port: 8081
+  port: ${PORT:8081}
 spring:
   application:
     name: user-service
@@ -18,7 +18,7 @@ spring:
 
 eureka:
   instance:
-    preferIpAddress: true
+    non-secure-port: 80
   client:
     fetch-registry: true
     register-with-eureka: true

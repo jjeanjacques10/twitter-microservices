@@ -1,5 +1,5 @@
 server:
-  port: 9002
+  port: ${PORT:9002}
 spring:
   application:
     name: gateway-service
@@ -12,8 +12,16 @@ eureka:
       enabled: true
     serviceUrl:
       defaultZone: ${EUREKA_URL:http://localhost:9000/eureka}
-      non-secure-port: 80
-      secure-port: 443
 
 jwt:
   secret: screte-value
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - mappings
+          - env
+          - health
+          - info

@@ -1,23 +1,30 @@
 server:
-  port: 8083
+  port: ${PORT:8083}
 spring:
   application:
     name: timeline-service
   redis:
     database: 0
     host: ${REDIS_URL:localhost}
-    port: 6379
-    password: eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
+    port: ${REDIS_PORT:6379}
+    password: ${REDIS_PASSWORD:eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81}
     timeout: 60000
 
 eureka:
+  instance:
+    non-secure-port: 80
   client:
-    enabled: true
+    fetch-registry: true
+    register-with-eureka: true
+    healthcheck:
+      enabled: true
     serviceUrl:
       defaultZone: ${EUREKA_URL:http://localhost:9000/eureka}
 
 cloud:
   aws:
+    accessKey: ${AWS_ACCESS_KEY}
+    secretKey: ${AWS_SECRET_KEY}
     stack:
       auto: false
       enabled: false
@@ -28,4 +35,4 @@ cloud:
 
 client:
   user-followers:
-    url: http://${USER_URL:localhost}:8081
+    url: ${USER_URL:http://localhost:8081}

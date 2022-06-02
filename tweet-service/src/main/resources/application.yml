@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: ${PORT:8084}
 spring:
   application:
     name: tweet-service
@@ -7,25 +7,33 @@ spring:
     driver-class-name: ${DRIVER_DB:com.mysql.cj.jdbc.Driver}
     username: ${USER_DB:root}
     password: ${PASSWORD_DB:brtwcvv1}
-    url: ${HOST_DB:jdbc:mysql://localhost:3307/user_database?useSSL=false}
+    url: ${HOST_DB:jdbc:mysql://localhost:3306/tweet_database?useSSL=false}
   jpa:
     defer-datasource-initialization: true
     properties.hibernate.format_sql: true
     generate-ddl: true
     hibernate.ddl.auto: update
-    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
-    #show-sql: true
+    database-platform: ${DIALECT_DB:org.hibernate.dialect.MySQL5InnoDBDialect}
+    show-sql: true
 
 eureka:
+  instance:
+    non-secure-port: 80
   client:
-    enabled: true
+    fetch-registry: true
+    register-with-eureka: true
+    healthcheck:
+      enabled: true
     serviceUrl:
       defaultZone: ${EUREKA_URL:http://localhost:9000/eureka}
 
 cloud:
   aws:
+    accessKey: ${AWS_ACCESS_KEY}
+    secretKey: ${AWS_SECRET_KEY}
     stack:
       auto: false
+      enabled: false
     region:
       static: us-west-1
     sqs:
