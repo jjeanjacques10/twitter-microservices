@@ -7,7 +7,7 @@ eureka:
     registerWithEureka: true
     fetchRegistry: true
     serviceUrl:
-      defaultZone: https://${eureka.instance.hostname}:${server.port}/eureka/
+      defaultZone: https://${eureka.instance.hostname}/eureka/
 
   server:
     eviction-interval-timer-in-ms: 1500
