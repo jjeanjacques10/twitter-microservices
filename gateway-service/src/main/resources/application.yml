@@ -6,6 +6,10 @@ spring:
 
 eureka:
   client:
+    fetch-registry: true
+    register-with-eureka: true
+    healthcheck:
+      enabled: true
     serviceUrl:
       defaultZone: ${EUREKA_URL:http://localhost:9000/eureka}
       non-secure-port: 80
