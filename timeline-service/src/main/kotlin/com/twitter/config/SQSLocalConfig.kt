@@ -1,9 +1,6 @@
 package com.twitter.config
 
-import com.amazonaws.auth.AWSStaticCredentialsProvider
-import com.amazonaws.auth.BasicAWSCredentials
 import com.amazonaws.client.builder.AwsClientBuilder
-import com.amazonaws.regions.Regions
 import com.amazonaws.services.sqs.AmazonSQSAsync
 import com.amazonaws.services.sqs.AmazonSQSAsyncClientBuilder
 import io.awspring.cloud.messaging.config.QueueMessageHandlerFactory
@@ -16,26 +13,28 @@ import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Primary
+import org.springframework.context.annotation.Profile
 import org.springframework.core.Ordered
 import org.springframework.core.annotation.Order
 
-
+@Profile("local")
 @Configuration
-class SQSConfig {
+class SQSLocalConfig {
 
-    @Value("\${cloud.aws.accessKey}")
-    private var accessKey: String? = null
+    @Value("\${cloud.aws.sqs.url}")
+    private var sqsUrl: String? = null
 
-    @Value("\${cloud.aws.secretKey}")
-    private var secretKey: String? = null
+    @Value("\${cloud.aws.region.static}")
+    private var sqsRegion: String? = null
 
     @Bean
     @Primary
     @Order(Ordered.HIGHEST_PRECEDENCE)
     fun amazonSQSAsync(): AmazonSQSAsync? {
-        log.info("Config AWS SQS - URL: {} Region: {}", accessKey, secretKey) // TODO: Remove it
-        return AmazonSQSAsyncClientBuilder.standard().withRegion(Regions.US_WEST_1)
-            .withCredentials(AWSStaticCredentialsProvider(BasicAWSCredentials(accessKey, secretKey))).build()
+        log.info("Config AWS SQS - URL: {} Region: {}", sqsUrl, sqsRegion)
+        return AmazonSQSAsyncClientBuilder.standard()
+            .withEndpointConfiguration(AwsClientBuilder.EndpointConfiguration(sqsUrl, sqsRegion))
+            .build()
     }
 
     @Bean

@@ -5,32 +5,31 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.Profile;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
-import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
-import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
 import software.amazon.awssdk.enhanced.dynamodb.DynamoDbEnhancedClient;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
 
+import java.net.URI;
+
+@Profile("local")
 @Slf4j
 @Configuration
-public class DynamoDbConfig {
+public class DynamoDbLocalConfig {
 
-    @Value("${cloud.aws.accessKey}")
-    private String accessKey;
-
-    @Value("${cloud.aws.secretKey}")
-    private String secretKey;
+    @Value("${cloud.aws.dynamodb.url}")
+    private String dynamoDbUrl;
 
     @Bean
     @Primary
     @Order(Ordered.HIGHEST_PRECEDENCE)
     public DynamoDbClient dynamoDbClient() {
+        log.info("Config AWS DynamoDB - URL: {}", dynamoDbUrl);
         return DynamoDbClient.builder()
                 .region(Region.US_WEST_1)
-                .credentialsProvider(StaticCredentialsProvider.create(
-                        AwsBasicCredentials.create(accessKey, secretKey)))
+                .endpointOverride(URI.create(dynamoDbUrl))
                 .build();
     }
 

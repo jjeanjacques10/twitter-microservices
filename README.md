@@ -49,6 +49,7 @@ Service to listener new tweets created and generate users' timeline in Redis
 - Localstack
     - DynamoDB
     - SQS
+- Heroku
 
 ## Get Started
 
