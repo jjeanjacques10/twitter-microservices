@@ -1,20 +1,32 @@
 <br />
 <p align="center">
-  <a href="https://github.com/jjeanjacques10/twitter-microservices">
-    <img src="./files/twitter-logo.png" width="100px" alt="Logo">
-  </a>
+    <img src="./files/twitter-logo.png" width="120" alt="Logo">
+    <p align="center">
+      Repository to recreate the microservices architecture of Twitter. 
+      <br />
+      <a href="https://github.com/jjeanjacques10/twitter-microservices"><strong>Explore the docs »</strong></a>
+      <br />
+      <br />
+      <a href="https://github.com/jjeanjacques10/twitter-microservices/issues">Report Bug</a>
+      ·
+      <a href="https://github.com/jjeanjacques10/twitter-microservices/issues">Request Feature</a>
+    </p>
+</p>
 
-<h3 align="center">Microservices Architecture of Twitter Service</h3>
-  <p align="center">
-    Repository to recreate the microservices architecture of Twitter. 
-    <br />
-    <a href="https://github.com/jjeanjacques10/twitter-microservices"><strong>Explore the docs »</strong></a>
-    <br />
-    <br />
-    <a href="https://github.com/jjeanjacques10/twitter-microservices/issues">Report Bug</a>
-    ·
-    <a href="https://github.com/jjeanjacques10/twitter-microservices/issues">Request Feature</a>
-  </p>
+<p align="center">
+   <a href="https://www.linkedin.com/in/jjean-jacques10/">
+      <img alt="Jean Jacques Barros" src="https://img.shields.io/badge/-JeanJacquesBarros-25ABE1?style=flat&logo=Linkedin&logoColor=white" />
+   </a>
+  <img alt="Repository size" src="https://img.shields.io/github/repo-size/jjeanjacques10/twitter-microservices?color=25ABE1">
+
+  <a href="https://github.com/jjeanjacques10/twitter-microservices/commits/master">
+    <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/jjeanjacques10/twitter-microservices?color=25ABE1">
+  </a>
+  <img alt="License" src="https://img.shields.io/badge/license-MIT-25ABE1">
+  <img alt="GitHub Pull Requests" src="https://img.shields.io/github/issues-pr/jjeanjacques10/twitter-microservices?color=25ABE1" />
+  <a href="https://github.com/jjeanjacques10/twitter-microservices/stargazers">
+    <img alt="Stargazers" src="https://img.shields.io/github/stars/jjeanjacques10/twitter-microservices?color=25ABE1&logo=github">
+  </a>
 </p>
 
 ### Tweet Service
@@ -25,6 +37,10 @@ The first service created was Tweet Service. Microservice to record tweets and f
 
 Manage users profiles to control authentication and authorization actions.
 
+### Timeline Service
+
+Service to listener new tweets created and generate users' timeline in Redis
+
 ### Eureka Service
 
 Service Discovery, it's where I'll register my microservices.
@@ -32,10 +48,6 @@ Service Discovery, it's where I'll register my microservices.
 ### Gateway Service
 
 Gateway provides a flexible way of routing requests.
-
-### Timeline Service
-
-Service to listener new tweets created and generate users' timeline in Redis
 
 ## Technologies
 
@@ -47,8 +59,8 @@ Service to listener new tweets created and generate users' timeline in Redis
 - MySQL
 - Redis
 - Localstack
-    - DynamoDB
-    - SQS
+  - DynamoDB
+  - SQS
 - Heroku
 
 ## Get Started
@@ -76,9 +88,9 @@ docker-compose -f docker-compose-app.yml up --build -d
 ```
 
 - Gateway Service: http://localhost:9002
-    - Tweet Service: [/tweet](http://localhost:9002)
-    - User Service: [/user](http://localhost:9002)
-    - Timeline Service: [/timeline](http://localhost:9002)
+  - Tweet Service: [/tweet](http://localhost:9002)
+  - User Service: [/user](http://localhost:9002)
+  - Timeline Service: [/timeline](http://localhost:9002)
 - Eureka Service: http://localhost:9000
 
 ### Postman
@@ -91,7 +103,7 @@ Access postman collection **[here](./files/Twitter.postman_collection.json)**
 
 - tweet (MySQL)
 - tb_favorite_tweets (Dynamo)
-    - Table Schema: [environment/dynamodb/tables.json](./environment/dynamodb/tables.json)
+  - Table Schema: [environment/dynamodb/tables.json](./environment/dynamodb/tables.json)
 
 ## Functional Requirements
 
