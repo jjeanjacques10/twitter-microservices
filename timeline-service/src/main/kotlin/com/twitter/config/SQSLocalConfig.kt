@@ -17,8 +17,8 @@ import org.springframework.context.annotation.Profile
 import org.springframework.core.Ordered
 import org.springframework.core.annotation.Order
 
-@Profile("local")
 @Configuration
+@Profile("local")
 class SQSLocalConfig {
 
     @Value("\${cloud.aws.sqs.url}")

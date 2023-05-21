@@ -14,9 +14,9 @@ import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
 
 import java.net.URI;
 
-@Profile("local")
 @Slf4j
 @Configuration
+@Profile("local")
 public class DynamoDbLocalConfig {
 
     @Value("${cloud.aws.dynamodb.url}")

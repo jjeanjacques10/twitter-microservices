@@ -1,7 +1,6 @@
 package com.twitter.gateway.consumer.contract
 
+import lombok.ToString
 
-class TimelineMessage {
-    lateinit var tweet: Tweet
-    lateinit var userId: String
-}
+@ToString
+data class TimelineMessage(var tweet: Tweet, var userId: String)
