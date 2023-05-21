@@ -1,0 +1,30 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: brtwcvv1
+    url: jdbc:mysql://localhost:3306/tweet_database?useSSL=false
+  jpa:
+    hibernate.ddl.auto: update
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    show-sql: true
+
+eureka:
+  instance:
+    non-secure-port: 80
+  client:
+    fetch-registry: false
+    register-with-eureka: false
+    healthcheck:
+      enabled: false
+    serviceUrl:
+      defaultZone: http://localhost:9000/eureka
+
+cloud:
+  aws:
+    accessKey: admin
+    secretKey: admin
+    sqs:
+      url: http://localhost:4576
+    dynamodb:
+      url: http://localhost:4566

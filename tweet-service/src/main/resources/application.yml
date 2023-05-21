@@ -14,7 +14,7 @@ spring:
     generate-ddl: true
     hibernate.ddl.auto: update
     database-platform: ${DIALECT_DB:org.hibernate.dialect.MySQL5InnoDBDialect}
-    show-sql: true
+    show-sql: false
 
 eureka:
   instance:

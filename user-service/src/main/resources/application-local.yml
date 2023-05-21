@@ -1,0 +1,33 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: brtwcvv1
+    url: jdbc:mysql://localhost:3306/tweet_database?useSSL=false
+  jpa:
+    hibernate.ddl.auto: update
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    show-sql: true
+
+eureka:
+  instance:
+    non-secure-port: 80
+  client:
+    fetch-registry: false
+    register-with-eureka: false
+    healthcheck:
+      enabled: false
+    serviceUrl:
+      defaultZone: http://localhost:9000/eureka
+
+jwt:
+  secret: screte-value
+  expiration: 86400000
+
+# Default user
+admin:
+  id: 1b2fe584-19b4-4173-9d3d-02acf970faa6
+  username: jjeanjacques10
+  email: jjeanjacques10@github.com
+  password: 12345
+  isHotUser: true
