@@ -31,6 +31,13 @@ services:
       - '3307:3307'
     volumes:
       - my-db-user:/var/lib/mysql
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - '9080:8080'
+    networks:
+      - twitter-network
   sqs-local:
     container_name: sqs-local
     image: localstack/localstack:latest
