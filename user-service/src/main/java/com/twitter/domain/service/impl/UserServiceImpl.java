@@ -5,6 +5,7 @@ import com.twitter.domain.entity.User;
 import com.twitter.domain.exception.NoContentFoundException;
 import com.twitter.domain.exception.UserNotFound;
 import com.twitter.domain.service.UserService;
+import com.twitter.exceptions.UserAlreadyExistsException;
 import com.twitter.gateway.repository.UserRepository;
 import com.twitter.gateway.rest.datacontract.RegisterDataContract;
 import com.twitter.gateway.rest.datacontract.UserDTO;
@@ -37,8 +38,8 @@ public class UserServiceImpl implements UserService {
                 .or(() -> Optional.of(userRepository.findByEmail(register.getEmail())))
                 .orElse(null);
 
-        if (userExists != null)
-            throw new IllegalArgumentException("User " + register.getUsername() + " " + register.getEmail() + " already exists");
+        if (userExists.isPresent())
+            throw new UserAlreadyExistsException("User " + register.getUsername() + " " + register.getEmail() + " already exists");
 
         var user = mapper.map(register, User.class);
         user.setIsHotUser(true);

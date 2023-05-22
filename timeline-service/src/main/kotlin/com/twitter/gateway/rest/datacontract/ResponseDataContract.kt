@@ -9,6 +9,6 @@ import lombok.NoArgsConstructor
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-class ResponseDataContract<T>(
+data class ResponseDataContract<T>(
     var data: T? = null
 )

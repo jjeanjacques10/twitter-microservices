@@ -9,5 +9,4 @@ import org.springframework.data.redis.core.index.Indexed
 data class Timeline(
     @Indexed @Id var userId: String,
     var items: MutableList<Tweet>? = mutableListOf()
-) {
-}
+)
