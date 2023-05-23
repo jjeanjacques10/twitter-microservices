@@ -1,4 +1,4 @@
-package com.twitter.exception
+package com.twitter.handler.model
 
 data class ExceptionDetails(
     val title: String,

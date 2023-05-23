@@ -26,10 +26,14 @@ class TimelineServiceImpl(
     override fun createTimeline(timelineMessage: TimelineMessage) {
         var followers: List<Followers> = followersClient.getFollowers(timelineMessage.userId)?.data ?: emptyList()
 
+        if (followers.isEmpty()) {
+            log.info("User not have followers")
+            return
+        }
         followers.forEach { it ->
-            var timeline: Timeline
+            val timeline: Timeline
 
-            var foundTimeline = timelineRepository.findById(it.followerId.toString())
+            val foundTimeline = timelineRepository.findById(it.followerId.toString())
             if (foundTimeline.isPresent) {
                 timeline = foundTimeline.get()
                 timeline.items?.add(timelineMessage.tweet)

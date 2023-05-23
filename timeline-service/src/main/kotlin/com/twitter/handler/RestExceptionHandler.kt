@@ -1,6 +1,6 @@
 package com.twitter.handler
 
-import com.twitter.exception.ExceptionDetails
+import com.twitter.handler.model.ExceptionDetails
 import com.twitter.exception.TimelineNotFound
 import io.micrometer.core.lang.Nullable
 import org.slf4j.Logger
